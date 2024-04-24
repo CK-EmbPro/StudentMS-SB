@@ -35,4 +35,24 @@ public class StudentController {
         stuService.createStudent(stu);
         return "redirect:/student/get";
     }
+
+    @GetMapping("/editStu/{id}")
+    public String editForm(@PathVariable Long id, Model model){
+        Student student = stuService.getStudentById(id);
+        model.addAttribute("student", student);
+        return "editStudent";
+    }
+
+    @PostMapping("update/{id}")
+    public String updateStudent(@PathVariable Long id, @ModelAttribute Student student){
+        Student student2 = stuService.getStudentById(id);
+        student2.setFirstName(student.getFirstName());
+        student2.setLastName(student.getLastName());
+        student2.setEmail(student.getEmail());
+
+        stuService.updateStudent(student2);
+
+        return "redirect:/student/get";
+    }
+
 }
