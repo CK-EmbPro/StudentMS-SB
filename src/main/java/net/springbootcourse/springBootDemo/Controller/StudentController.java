@@ -55,4 +55,10 @@ public class StudentController {
         return "redirect:/student/get";
     }
 
+    @GetMapping("/delete/{id}")
+    public String deleteStudent(@PathVariable Long id){
+        stuService.deleteStudent(id);
+        return "redirect:/student/get";
+    }
+
 }
